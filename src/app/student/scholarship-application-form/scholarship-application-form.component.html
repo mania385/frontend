@@ -1,0 +1,650 @@
+<div class="container py-5">
+  <div class="card">
+    <h4 class="card-header text-center">Scholarship Application Form</h4>
+    <div class="card-body px-4">
+      <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+      </div>
+      <form #scholarshipApplicationForm="ngForm" *ngIf="!submitted" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- {{ scholarshipApplicationForm | json}} -->
+        <!-- {{ scholarshipModel | json}} -->
+
+        <div ngModelGroup="BASIC DETAILS">
+          <h5 class="underline mb-3 mt-2"><u>BASIC DETAILS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-5">
+              <label for="fname" class="form-label">Father Name</label>
+              <input
+                type="text" required #FatherName="ngModel" [class.is-invalid]="FatherName.invalid && FatherName.touched"
+                name="FatherName"
+                class="form-control"
+                [(ngModel)]="scholarshipModel.FatherName"
+              />
+              <small class="text-danger" [class.d-none]="FatherName.valid || FatherName.untouched">Father Name is required</small>
+            </div>
+
+            <div class="col-md-5">
+              <label for="mname" class="form-label">Mother Name</label>
+              <input
+              type="text" required #MotherName="ngModel" [class.is-invalid]="MotherName.invalid && MotherName.touched"
+                name="MotherName"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.MotherName"
+              />
+              <small class="text-danger" [class.d-none]="MotherName.valid || MotherName.untouched">Mother Name is required</small>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="domicile">Religion</label>
+              <select class="form-select" aria-label="Default select example" required #Religion="ngModel" [class.is-invalid]="Religion.invalid && Religion.touched"
+                 name="Religion" [(ngModel)]="scholarshipModel.Religion">
+                <option selected>Select Religion</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <small class="text-danger" [class.d-none]="Religion.valid || Religion.untouched">Religion is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Community</label>
+              <input
+                type="text" required #Community="ngModel" [class.is-invalid]="Community.invalid && Community.touched"
+                name="Community"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.Community"
+              />
+              <small class="text-danger" [class.d-none]="Community.valid || Community.untouched">Community is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Aadhar Number</label>
+              <input
+                type="text" #AadharNumber="ngModel" pattern="^\d{12}"
+                [class.is-invalid]="AadharNumber.invalid && AadharNumber.touched"
+                name="AadharNumber"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.AadharNumber"
+              />
+              
+              <small class="text-danger" [class.d-none]="AadharNumber.valid || AadharNumber.untouched">AadharNumber is required</small>
+              <!-- <div *ngIf="AadharNumber.errors && (AadharNumber.invalid || AadharNumber.touched)">
+                <small class="text-danger" *ngIf="AadharNumber.errors?.['required']">AadharNumber is required</small>
+                <small class="text-danger" *ngIf="AadharNumber.errors?.['pattern']">AadharNumber must be 12 digits</small>
+              </div> -->
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Family Annual Income</label>
+              <input
+              type="text" required #FamilyAnnualIncome="ngModel" 
+              [class.is-invalid]="FamilyAnnualIncome.invalid && FamilyAnnualIncome.touched"
+                name="FamilyAnnualIncome"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.FamilyAnnualIncome"
+              />
+              <small class="text-danger" [class.d-none]="FamilyAnnualIncome.valid || FamilyAnnualIncome.untouched">Required Field</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="ACADEMIC DETAILS">
+          <h5 class="underline mb-3 mt-4"><u>ACADEMIC DETAILS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-5">
+              <label class="form-label" for="domicile">Institute Name</label>
+              <select class="form-select" aria-label="Default select example" required #InstituteName="ngModel" [class.is-invalid]="InstituteName.invalid && InstituteName.touched"
+                 name="InstituteName" [(ngModel)]="scholarshipModel.InstituteName">
+                <option selected>Select Religion</option>
+                <option value="xx">One</option>
+                <option value="yy">Two</option>
+                <option value="zz">Three</option>
+              </select>
+              <small class="text-danger" [class.d-none]="InstituteName.valid || InstituteName.untouched">Institute Name is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="Pcc" class="form-label">Present Course</label>
+              <input
+                type="text" required #PresentCourse="ngModel" [class.is-invalid]="PresentCourse.invalid && PresentCourse.touched"
+                name="PresentCourse"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.PresentCourse"
+              />
+              <small class="text-danger" [class.d-none]="PresentCourse.valid || PresentCourse.untouched">It is required</small>
+            </div>
+            <div class="col-md-3">
+              <label for="mname" class="form-label"
+                >Present Course Year</label
+              >
+              <input
+                type="text" #PresentCourseYear="ngModel" pattern="^\d{4}"
+                [class.is-invalid]="PresentCourseYear.invalid && PresentCourseYear.touched"
+                name="PresentCourseYear"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.PresentCourseYear"
+              />
+              <small class="text-danger" [class.d-none]="PresentCourseYear.valid || PresentCourseYear.untouched">Year is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label class="form-label" for="domicile">Mode of Study</label>
+              <select class="form-select" aria-label="Default select example" required #ModeOfStudy="ngModel" [class.is-invalid]="ModeOfStudy.invalid && ModeOfStudy.touched"
+                name="ModeOfStudy" [(ngModel)]="scholarshipModel.ModeOfStudy">
+                <option selected>Select Religion</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+              </select>
+              <small class="text-danger" [class.d-none]="ModeOfStudy.valid || ModeOfStudy.untouched">It is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">University/Board Name</label>
+              <input
+                type="text" required #UniversityBoardName="ngModel" 
+                [class.is-invalid]="UniversityBoardName.invalid && UniversityBoardName.touched"
+                name="UniversityBoardName"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.UniversityBoardName"
+              />
+              <small class="text-danger" [class.d-none]="UniversityBoardName.valid || UniversityBoardName.untouched">University/Board Name is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Class Start Date</label>
+              <div class="input-group">
+                <input
+                  class="form-control" required #ClassStartDate="ngModel" [class.is-invalid]="ClassStartDate.invalid && ClassStartDate.touched"
+                  placeholder="yyyy-mm-dd"
+                  name="ClassStartDate"
+                  [(ngModel)]="scholarshipModel.ClassStartDate"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                />
+                <small class="text-danger" [class.d-none]="ClassStartDate.valid || ClassStartDate.untouched">Date is required</small>
+                <button
+                  class="btn btn-outline-secondary"
+                  (click)="d.toggle()"
+                  type="button"
+                >
+                  <i class="bi bi-calendar-fill"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label class="form-label" for="domicile"
+                >Previous Course</label
+              >
+              <input
+                type="text" required #PreviousCourse="ngModel" 
+                [class.is-invalid]="PreviousCourse.invalid && PreviousCourse.touched"
+                name="PreviousCourse"
+                class="form-control"
+                id="pc"
+                required
+                [(ngModel)]="scholarshipModel.PreviousCourse"
+              />
+              <small class="text-danger" [class.d-none]="PreviousCourse.valid || PreviousCourse.untouched">It is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Previous Passing Year</label>
+              <input
+                type="text" #PreviousPassingYear="ngModel" pattern="^\d{4}"
+                [class.is-invalid]="PreviousPassingYear.invalid && PreviousPassingYear.touched"
+                name="PreviousPassingYear"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.PreviousPassingYear"
+              />
+              <small class="text-danger" [class.d-none]="PreviousPassingYear.valid || PreviousPassingYear.untouched">Year is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Previous Class Percentage </label>
+              <input
+                type="text" required #PreviousClassPercentage="ngModel" 
+                  [class.is-invalid]="PreviousClassPercentage.invalid && PreviousClassPercentage.touched"
+                name="PreviousClassPercentage"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.PreviousClassPercentage"
+              />
+              <small class="text-danger" [class.d-none]="PreviousClassPercentage.valid || PreviousClassPercentage.untouched">Percentage is required</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="10TH CLASS">
+          <h5 class="underline mb-3 mt-4"><u>10TH CLASS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="fname" class="form-label">Roll Number</label>
+              <input
+                type="text" #RollNumber="ngModel"
+                [class.is-invalid]="RollNumber.invalid && RollNumber.touched"
+                name="RollNumber"
+                class="form-control"
+                id="fname"
+                required
+                [(ngModel)]="scholarshipModel.RollNumber"
+              />
+              <small class="text-danger" [class.d-none]="RollNumber.valid || RollNumber.untouched">Roll Number is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="mname" class="form-label">Board Name</label>
+              <input
+                type="text" required #BoardName="ngModel" 
+                [class.is-invalid]="BoardName.invalid && BoardName.touched"
+                name="BoardName"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.BoardName"
+              />
+              <small class="text-danger" [class.d-none]="BoardName.valid || BoardName.untouched">Board Name is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="mname" class="form-label">Passing Year</label>
+              <input
+                type="text" #PassingYear="ngModel" pattern="^\d{4}"
+                [class.is-invalid]="PassingYear.invalid && PassingYear.touched"
+                name="PassingYear"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.PassingYear"
+              />
+              <small class="text-danger" [class.d-none]="PassingYear.valid || PassingYear.untouched">Year is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="mname" class="form-label">Percentage Obtained</label>
+              <input
+                type="text" required #PercentageObtained="ngModel" 
+                [class.is-invalid]="PercentageObtained.invalid && PercentageObtained.touched"
+                name="PercentageObtained"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.PercentageObtained"
+              />
+              <small class="text-danger" [class.d-none]="PercentageObtained.valid || PercentageObtained.untouched">Percentage is required</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="12TH CLASS">
+          <h5 class="underline mb-3 mt-4"><u>12TH CLASS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="fname" class="form-label">Roll Number</label>
+              <input
+                type="text" #Rollnumber="ngModel"
+                [class.is-invalid]="Rollnumber.invalid && Rollnumber.touched"
+                name="Rollnumber"
+                class="form-control"
+                id="fname"
+                required
+                [(ngModel)]="scholarshipModel.Rollnumber"
+              />
+              <small class="text-danger" [class.d-none]="Rollnumber.valid || Rollnumber.untouched">Roll Number is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="mname" class="form-label">Board name</label>
+              <input
+                type="text" required #Boardname="ngModel" 
+                [class.is-invalid]="Boardname.invalid && Boardname.touched"
+                name="Boardname"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.Boardname"
+              />
+              <small class="text-danger" [class.d-none]="Boardname.valid || Boardname.untouched">Board Name is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="mname" class="form-label">Passing Year</label>
+              <input
+                type="text" #Passingyear="ngModel" pattern="^\d{4}"
+                [class.is-invalid]="Passingyear.invalid && Passingyear.touched"
+                name="Passingyear"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.Passingyear"
+              />
+              <small class="text-danger" [class.d-none]="Passingyear.valid || Passingyear.untouched">Year is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="mname" class="form-label">Percentage obtained</label>
+              <input
+                type="text" required #Percentageobtained="ngModel" 
+                [class.is-invalid]="Percentageobtained.invalid && Percentageobtained.touched"
+                name="Percentageobtained"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.Percentageobtained"
+              />
+              <small class="text-danger" [class.d-none]="Percentageobtained.valid || Percentageobtained.untouched">Percentage is required</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="FEE DETAILS">
+          <h5 class="underline mb-3 mt-4"><u>FEE DETAILS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="fname" class="form-label">Addmission Fee</label>
+              <input
+                type="text" required #AddmissionFee="ngModel" 
+                [class.is-invalid]="AddmissionFee.invalid && AddmissionFee.touched"
+                name="AddmissionFee"
+                class="form-control"
+                id="fname"
+                required
+                [(ngModel)]="scholarshipModel.AddmissionFee"
+              />
+              <small class="text-danger" [class.d-none]="AddmissionFee.valid || AddmissionFee.untouched">Required Field</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Tution Fee</label>
+              <input
+                type="text" required #TutionFee="ngModel" 
+                [class.is-invalid]="TutionFee.invalid && TutionFee.touched"
+                name="TutionFee"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.TutionFee"
+              />
+              <small class="text-danger" [class.d-none]="TutionFee.valid || TutionFee.untouched">Required Field</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Other Fee</label>
+              <input
+                type="text" required #OtherFee="ngModel" 
+                [class.is-invalid]="OtherFee.invalid && OtherFee.touched"
+                name="OtherFee"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.OtherFee"
+              />
+              <small class="text-danger" [class.d-none]="OtherFee.valid || OtherFee.untouched">Required Field</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="OTHER PERSONAL DETAILS">
+          <h5 class="underline mb-3 mt-4"><u>OTHER PERSONAL DETAILS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="fname" class="form-label">Is Disabled</label>
+              <select class="form-select" aria-label="Default select example" required #IsDisabled="ngModel" [class.is-invalid]="IsDisabled.invalid && IsDisabled.touched"
+                name="IsDisabled" [(ngModel)]="scholarshipModel.IsDisabled">
+                <option selected>Select Option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              <small class="text-danger" [class.d-none]="IsDisabled.valid || IsDisabled.untouched">Required Field</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Type of Disability</label>
+              <input
+                type="text" required #TypeOfDisability="ngModel" 
+                [class.is-invalid]="TypeOfDisability.invalid && TypeOfDisability.touched"
+                name="TypeOfDisability"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.TypeOfDisability"
+              />
+              <small class="text-danger" [class.d-none]="TypeOfDisability.valid || TypeOfDisability.untouched">Required Field</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Disability Percentage </label>
+              <input
+                type="text" required #DisabilityPercentage="ngModel" 
+                [class.is-invalid]="DisabilityPercentage.invalid && DisabilityPercentage.touched"
+                name="DisabilityPercentage"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.DisabilityPercentage"
+              />
+              <small class="text-danger" [class.d-none]="DisabilityPercentage.valid || DisabilityPercentage.untouched">Required Field</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-5">
+              <label for="fname" class="form-label">Martial Status</label>
+              <select class="form-select" aria-label="Default select example" required #MartialStatus="ngModel" [class.is-invalid]="MartialStatus.invalid && MartialStatus.touched"
+                name="MartialStatus" [(ngModel)]="scholarshipModel.MartialStatus">
+                <option selected>Select Martial Status</option>
+                <option value="Married">Married</option>
+                <option value="Single">Single</option>
+              </select>
+              <small class="text-danger" [class.d-none]="MartialStatus.valid || MartialStatus.untouched">Status is required</small>
+            </div>
+            <div class="col-md-7">
+              <label for="mname" class="form-label">Parents Profession</label>
+              <input
+                type="text" required #ParentsProfession="ngModel" 
+                [class.is-invalid]="ParentsProfession.invalid && ParentsProfession.touched"
+                name="ParentsProfession"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.ParentsProfession"
+              />
+              <small class="text-danger" [class.d-none]="ParentsProfession.valid || ParentsProfession.untouched">Profession name is required</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="CONTACT DETAILS">
+          <h5 class="underline mb-3 mt-4" name="cd"ngModel><u>CONTACT DETAILS: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="fname" class="form-label">State</label>
+              <select
+                class="form-select" required #State="ngModel" [class.is-invalid]="State.invalid && State.touched"
+                aria-label="Default select example"
+                (change)="changeDistrict($event)" name="State" [(ngModel)]="scholarshipModel.State"
+              >
+                <option *ngFor="let state of states" value="{{ state.state }}">
+                  {{ state.state }}
+                </option>
+              </select>
+              <small class="text-danger" [class.d-none]="State.valid || State.untouched">Select a state</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">District</label>
+              <select class="form-select" aria-label="Default select example" required #District="ngModel" [class.is-invalid]="District.invalid && District.touched"
+                name="District" [(ngModel)]="scholarshipModel.District">
+                <option selected>Select District</option>
+                <option *ngFor="let district of districts" value="{{ district }}">
+                  {{ district }}
+                </option>
+              </select>
+              <small class="text-danger" [class.d-none]="District.valid || District.untouched">First select a state then select a district</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Block/Taluk</label>
+              <select class="form-select" aria-label="Default select example" required #BlockTaluk="ngModel" [class.is-invalid]="BlockTaluk.invalid && BlockTaluk.touched"
+                name="BlockTaluk" [(ngModel)]="scholarshipModel.BlockTaluk">
+                <option selected>Select Block</option>
+                <option value="One">One</option>
+                <option value="Two">Two</option>
+              </select>
+              <small class="text-danger" [class.d-none]="BlockTaluk.valid || BlockTaluk.untouched">Block/Taluk name is required</small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="fname" class="form-label">House Number</label>
+              <input
+                type="text" required #HouseNumber="ngModel" 
+                [class.is-invalid]="HouseNumber.invalid && HouseNumber.touched"
+                name="HouseNumber"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.HouseNumber"
+              />
+              <small class="text-danger" [class.d-none]="HouseNumber.valid || HouseNumber.untouched">House number is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Street Number</label>
+              <input
+                type="text" required #StreetNumber="ngModel" 
+                [class.is-invalid]="StreetNumber.invalid && StreetNumber.touched"
+                name="StreetNumber"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.StreetNumber"
+              />
+              <small class="text-danger" [class.d-none]="StreetNumber.valid || StreetNumber.untouched">Street number is required</small>
+            </div>
+            <div class="col-md-4">
+              <label for="mname" class="form-label">Pincode</label>
+              <input
+                type="text" required #Pincode="ngModel" 
+                [class.is-invalid]="Pincode.invalid && Pincode.touched"
+                name="Pincode"
+                class="form-control"
+                id="mname"
+                required
+                [(ngModel)]="scholarshipModel.Pincode"
+              />
+              <small class="text-danger" [class.d-none]="Pincode.valid || Pincode.untouched">Pincode is required</small>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="mname" class="form-label"
+                >Choose Scheme Applying For</label
+              >
+              <select class="form-select" aria-label="Default select example" required #ChooseScheme="ngModel" [class.is-invalid]="ChooseScheme.invalid && ChooseScheme.touched"
+                 name="ChooseScheme" [(ngModel)]="scholarshipModel.ChooseScheme">
+                <option selected>Choose Scheme</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+              </select>
+              <small class="text-danger" [class.d-none]="ChooseScheme.valid || ChooseScheme.untouched">Scheme name is required</small>
+            </div>
+          </div>
+        </div>
+        <div ngModelGroup="DOCUMENTS UPLOAD SECTION">
+          <h5 class="underline mb-3 mt-4"><u>DOCUMENTS UPLOAD SECTION: </u></h5>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >Domicile Certificate</label
+              >
+              <input class="form-control" type="file" id="formFile" required #DomicileCertificate="ngModel" [class.is-invalid]="DomicileCertificate.invalid && DomicileCertificate.touched" name="DomicileCertificate" [(ngModel)]="scholarshipModel.DomicileCertificate" />
+              <small class="text-danger" [class.d-none]="DomicileCertificate.valid || DomicileCertificate.untouched">Domicile Certificate is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="formFile" class="form-label">Student Photograph</label>
+              <input class="form-control" type="file" id="formFile" required #StudentPhotograph="ngModel" [class.is-invalid]="StudentPhotograph.invalid && StudentPhotograph.touched" name="StudentPhotograph" [(ngModel)]="scholarshipModel.StudentPhotograph" />
+              <small class="text-danger" [class.d-none]="StudentPhotograph.valid || StudentPhotograph.untouched">Student Photograph is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="formFile" class="form-label">Institute ID Card</label>
+              <input class="form-control" type="file" id="formFile" required #InstituteIDCard="ngModel" [class.is-invalid]="InstituteIDCard.invalid && InstituteIDCard.touched" name="InstituteIDCard" [(ngModel)]="scholarshipModel.InstituteIDCard" />
+              <small class="text-danger" [class.d-none]="InstituteIDCard.valid || InstituteIDCard.untouched">Institute ID Card is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >Caste/Income Certificate</label
+              >
+              <input class="form-control" type="file" id="formFile" required #CasteIncomeCertificate="ngModel" [class.is-invalid]="CasteIncomeCertificate.invalid && CasteIncomeCertificate.touched" name="CasteIncomeCertificate" [(ngModel)]="scholarshipModel.CasteIncomeCertificate" />
+              <small class="text-danger" [class.d-none]="CasteIncomeCertificate.valid || CasteIncomeCertificate.untouched">Caste/Income Certificate is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >Previous Year Marksheet</label
+              >
+              <input class="form-control" type="file" id="formFile" required #PreviousYearMarksheet="ngModel" [class.is-invalid]="PreviousYearMarksheet.invalid && PreviousYearMarksheet.touched" name="PreviousYearMarksheet" [(ngModel)]="scholarshipModel.PreviousYearMarksheet"/>
+              <small class="text-danger" [class.d-none]="PreviousYearMarksheet.valid || PreviousYearMarksheet.untouched">Previous Year Marksheet is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >Fee Receipt of Current Year</label
+              >
+              <input class="form-control" type="file" id="formFile" required #FeeReceiptofCurrentYear="ngModel" [class.is-invalid]="FeeReceiptofCurrentYear.invalid && FeeReceiptofCurrentYear.touched" name="FeeReceiptofCurrentYear" [(ngModel)]="scholarshipModel.FeeReceiptofCurrentYear" />
+              <small class="text-danger" [class.d-none]="FeeReceiptofCurrentYear.valid || FeeReceiptofCurrentYear.untouched">Fee Receipt of Current Year is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >Bank Passbook (Front Page)</label
+              >
+              <input class="form-control" type="file" id="formFile" required #BankPassbook="ngModel" [class.is-invalid]="BankPassbook.invalid && BankPassbook.touched" name="BankPassbook" [(ngModel)]="scholarshipModel.BankPassbook"/>
+              <small class="text-danger" [class.d-none]="BankPassbook.valid || BankPassbook.untouched">Bank Passbook (Front Page) is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="formFile" class="form-label">Aadhar Card</label>
+              <input class="form-control" type="file" id="formFile" required #AadharCard="ngModel" [class.is-invalid]="AadharCard.invalid && AadharCard.touched" name="AadharCard" [(ngModel)]="scholarshipModel.AadharCard"/>
+              <small class="text-danger" [class.d-none]="AadharCard.valid || AadharCard.untouched">Aadhar Card is required</small>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >10th Class Marksheet</label
+              >
+              <input class="form-control" type="file" id="formFile" required #ClassMarksheet="ngModel" [class.is-invalid]="ClassMarksheet.invalid && ClassMarksheet.touched" name="ClassMarksheet" [(ngModel)]="scholarshipModel.ClassMarksheet"/>
+              <small class="text-danger" [class.d-none]="ClassMarksheet.valid || ClassMarksheet.untouched">10th Class Marksheet is required</small>
+            </div>
+            <div class="col-md-6">
+              <label for="formFile" class="form-label"
+                >12th Class Marksheet</label
+              >
+              <input class="form-control" type="file" id="formFile" required #Classmarksheet="ngModel" [class.is-invalid]="Classmarksheet.invalid && Classmarksheet.touched" name="Classmarksheet" [(ngModel)]="scholarshipModel.Classmarksheet"/>
+              <small class="text-danger" [class.d-none]="Classmarksheet.valid || Classmarksheet.untouched">12th Class Marksheet is required</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input"  required #tickisrequired="ngModel" [class.is-invalid]="tickisrequired.invalid && tickisrequired.touched" name="tickisrequired" [(ngModel)]="scholarshipModel.tickisrequired" type="checkbox">
+          <label class="form-check-label">
+            ALL THE DETAILS FURNISHED BY ME ARE TRUE TO BEST OF MY KNOWLEDGE. IF
+            ANY MISTAKES ARE FOUND THEN I MAY BE DISQUALIFIED FOR SCHOLARSHIP
+            SCHEME ANNOUNCED BY GOVERNMENT OF INDIA OR MY STATE GOVERNMENT
+          </label>
+          <small class="text-danger" [class.d-none]="tickisrequired.valid || tickisrequired.untouched">Checkbox Tick is required</small>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+          <button [disabled]="scholarshipApplicationForm.form.invalid" type="submit" class="btn btn-dark px-4">Apply</button>
+          <button type="submit" class="btn btn-outline-secondary px-4">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
